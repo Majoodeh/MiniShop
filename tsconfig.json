@@ -2,7 +2,7 @@
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
     // File Layout
-  "rootDir": "./server",
+    "rootDir": "./server",
     "outDir": "./dist",
     "allowJs": true,
 
@@ -13,7 +13,7 @@
     "target": "ES2022",
     "types": [],
     // For nodejs:
-   "lib": ["ES2022"],
+    "lib": ["ES2022"],
     // "types": ["node"],
     // and npm install -D @types/node
 
@@ -46,6 +46,5 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true
   },
-"include": ["server/**/*"]
-
+  "include": ["server/**/*"]
 }
