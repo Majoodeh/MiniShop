@@ -25,7 +25,6 @@ export const getAllProducts = async (req: Request, res: Response) => {
 
 //! ---- CREATE NEW PRODUCT ------------------------------------------------------
 export const createNewProduct = async (req: Request, res: Response) => {
-
   //  Validate the request body against the schema
   const validatedProduct = ProductSchema.safeParse(req.body);
   if (!validatedProduct.success) {
@@ -51,8 +50,8 @@ export const createNewProduct = async (req: Request, res: Response) => {
 export const updateProduct = async (req: Request, res: Response) => {
   const { id } = req.params; // extract the product ID from the request parameters
 
-// Check if the product ID is provided and is a string.
-if (!id || typeof id !== 'string') {
+  // Check if the product ID is provided and is a string.
+  if (!id || typeof id !== 'string') {
     return res.status(400).json({ message: 'Product ID is required' });
   }
 

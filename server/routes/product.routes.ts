@@ -3,7 +3,8 @@ import {
   createNewProduct,
   deleteProduct,
   getAllProducts,
-  updateProduct} from '../controllers/product.controller.js';
+  updateProduct,
+} from '../controllers/product.controller.js';
 
 const router = express.Router();
 
