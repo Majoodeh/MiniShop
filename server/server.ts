@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json());
 
 // middleware to handle requests to the /api/products endpoint.
-app.use( '/api/products', productRouter); 
+app.use('/api/products', productRouter);
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   connectDB();
