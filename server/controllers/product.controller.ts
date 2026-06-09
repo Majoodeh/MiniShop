@@ -4,7 +4,6 @@ import { z } from 'zod';
 
 import mongoose from 'mongoose';
 
-
 // define input validation schema using zod
 const ProductSchema = z.object({
   name: z.string().min(1, 'Name is required'),
@@ -14,8 +13,6 @@ const ProductSchema = z.object({
   category: z.string().min(1, 'Category is required'),
 });
 
-
-
 //! ---- GET ALL PRODUCTS ------------------------------------------------------
 export const getAllProducts = async (req: Request, res: Response) => {
   try {
@@ -24,12 +21,10 @@ export const getAllProducts = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(500).json({ message: 'Error fetching products' });
   }
-}
-
+};
 
 //! ---- CREATE NEW PRODUCT ------------------------------------------------------
 export const createNewProduct = async (req: Request, res: Response) => {
-  console.log('starting new product');
 
   //  Validate the request body against the schema
   const validatedProduct = ProductSchema.safeParse(req.body);
@@ -46,17 +41,20 @@ export const createNewProduct = async (req: Request, res: Response) => {
 
   try {
     const savedProduct: IProductDocument = await newProduct.save();
-    res.status(201).json(savedProduct);
+    res.status(201).json({ success: true, data: savedProduct });
   } catch (error) {
     res.status(500).json({ message: 'Error saving product' });
   }
-}
-
-
+};
 
 //! ---- UPDATE PRODUCT ------------------------------------------------------
 export const updateProduct = async (req: Request, res: Response) => {
   const { id } = req.params; // extract the product ID from the request parameters
+
+// Check if the product ID is provided and is a string.
+if (!id || typeof id !== 'string') {
+    return res.status(400).json({ message: 'Product ID is required' });
+  }
 
   //Check if the provided ID is a valid MongoDB ObjectId using mongoose.Types.ObjectId.isValid.
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -86,12 +84,10 @@ export const updateProduct = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(500).json({ message: 'Error updating product' });
   }
-}
-
-
+};
 
 //! ---- DELETE PRODUCT ------------------------------------------------------
-export const deleteProduct =  async (req: Request, res: Response) => {
+export const deleteProduct = async (req: Request, res: Response) => {
   const { id } = req.params; // extract the product ID from the request parameters
 
   //Check if the provided ID is a valid MongoDB ObjectId using mongoose.Types.ObjectId.isValid.
@@ -116,4 +112,4 @@ export const deleteProduct =  async (req: Request, res: Response) => {
   } catch (error) {
     res.status(500).json({ message: 'Error deleting product' });
   }
-}
+};
