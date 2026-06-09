@@ -7,12 +7,12 @@ export const connectDB = async (): Promise<void> => {
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
     if (error instanceof Error) {
-        console.error(`Error: ${error.message}`);
+      console.error(`Error: ${error.message}`);
     } else {
-        console.error('An unknown error occurred while connecting to the database.');
-     }}
+      console.error('An unknown error occurred while connecting to the database.');
+    }
+      process.exit(1); // 1 indicates failure and 0 indicates success
 
-
-    process.exit(1); // 1 indicates failure and 0 indicates success
   }
 
+};
